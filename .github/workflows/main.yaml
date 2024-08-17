@@ -1,0 +1,39 @@
+name: issue
+
+permissions:
+  issues: write
+
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+jobs:
+  issue_on_commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Créer un ticket avec l'API REST
+        run: |
+             curl --request POST --url https://api.github.com/repos/${{ github.repository }}/issues \
+             --header 'authorization: Bearer ${{ secrets.SUPER_SECRET }}' \
+             --header 'content-type: application/json' \
+             --data '{
+               "title": "Ticket automatisé pour le commit : ${{ github.event.head_commit.message }}",
+               "body": "Ce ticket a été créé automatiquement par le workflow GitHub Actions ${{ github.workflow }}. \n\nLe hash du commit était: ${{ github.sha }}. \n\n Message du commit : ${{ github.event.head_commit.message}}"
+             }'
+      
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade -r requirements.txt
+
+      - name: Run Python script to plot graphs
+        run: |
+          python programme.py
+          

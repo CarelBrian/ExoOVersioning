@@ -1,0 +1,10 @@
+*.pyc
+__pycache__/
+.vscode/
+.DS_Store
+data/raw/
+data/cleaned/
+models/
+notebooks/
+reports/
+plots.png
