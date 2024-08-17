@@ -11,3 +11,4 @@ Le programme est structuré de manière modulaire avec des dossiers séparés pour l
 2. Installez les dépendances listées dans `requirements.txt`.
 3. Exécutez `main.py` pour générer les graphiques.
 4. Poussez les changements sur GitHub pour déclencher GitHub Actions.
+# Modified README.md
